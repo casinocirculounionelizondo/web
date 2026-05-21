@@ -48,6 +48,7 @@
       <!-- Cabecera de la zona privada -->
       <header class="privado-cabecera">
         <h1 class="privado-titulo">Zona de Socios</h1>
+        <!-- El enlace al panel admin se inyecta aquí por JS si hay sesión admin -->
         <button class="btn btn-ghost btn-sm" id="btn-logout">Cerrar sesión</button>
       </header>
 
@@ -55,11 +56,12 @@
            La primera pestaña y el primer panel tienen sus clases activas en el HTML.
            js/socios-auth.js gestiona los cambios al hacer clic. -->
       <nav class="privado-tabs" aria-label="Secciones de la zona de socios" role="tablist">
-        <button class="privado-tab activa" data-panel="anuncios"   role="tab" aria-selected="true"  aria-controls="anuncios">Tablón</button>
-        <button class="privado-tab"        data-panel="estatutos"  role="tab" aria-selected="false" aria-controls="estatutos">Estatutos</button>
-        <button class="privado-tab"        data-panel="actas"      role="tab" aria-selected="false" aria-controls="actas">Actas</button>
-        <button class="privado-tab"        data-panel="directorio" role="tab" aria-selected="false" aria-controls="directorio">Directorio</button>
-        <button class="privado-tab"        data-panel="eventos"    role="tab" aria-selected="false" aria-controls="eventos">Eventos</button>
+        <button class="privado-tab activa" data-panel="anuncios"    role="tab" aria-selected="true"  aria-controls="anuncios">Tablón</button>
+        <button class="privado-tab"        data-panel="estatutos"   role="tab" aria-selected="false" aria-controls="estatutos">Estatutos</button>
+        <button class="privado-tab"        data-panel="documentos"  role="tab" aria-selected="false" aria-controls="documentos">Documentos</button>
+        <button class="privado-tab"        data-panel="directorio"  role="tab" aria-selected="false" aria-controls="directorio">Directorio</button>
+        <button class="privado-tab"        data-panel="eventos"     role="tab" aria-selected="false" aria-controls="eventos">Eventos</button>
+        <button class="privado-tab"        data-panel="sugerencias" role="tab" aria-selected="false" aria-controls="sugerencias">Sugerencias</button>
       </nav>
 
       <!-- ============================================================
@@ -75,9 +77,10 @@
 
       <!-- ============================================================
            PANEL B — ESTATUTOS
-           Contenido estático. Sustituir docs/estatutos.pdf por el PDF real.
+           Contenido estático. El PDF se sirve desde docs/estatutos.pdf
+           hasta que se migre al bucket de Supabase Storage.
            ============================================================ -->
-      <section id="estatutos" class="privado-panel" role="tabpanel">
+      <section id="estatutos" class="privado-panel" role="tabpanel" aria-labelledby="tab-estatutos">
         <h2 class="panel-titulo">Estatutos de la Sociedad</h2>
         <div class="estatutos-bloque">
           <p class="estatutos-texto">
@@ -85,7 +88,6 @@
             de la Unión, los derechos y obligaciones de los socios, y el régimen
             de gobierno de la sociedad.
           </p>
-          <!-- Sustituir docs/estatutos.pdf por el PDF real cuando esté disponible -->
           <a href="docs/estatutos.pdf" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
             Ver estatutos
           </a>
@@ -93,13 +95,14 @@
       </section>
 
       <!-- ============================================================
-           PANEL C — ACTAS DE REUNIONES
-           Contenido cargado por js/actas.js desde Supabase.
-           Los PDF de actas se sirven desde la ruta url_pdf almacenada en BD.
+           PANEL C — DOCUMENTOS
+           Contenido cargado por js/documentos.js desde Supabase.
+           Lee de la tabla `documentos` (actas, convocatorias, etc.).
+           Los PDFs se sirven desde Supabase Storage (url_storage en BD).
            ============================================================ -->
-      <section id="actas" class="privado-panel" role="tabpanel">
-        <h2 class="panel-titulo">Actas de reuniones</h2>
-        <div id="actas-lista">
+      <section id="documentos" class="privado-panel" role="tabpanel" aria-labelledby="tab-documentos">
+        <h2 class="panel-titulo">Documentos</h2>
+        <div id="documentos-lista">
           <p class="empty-state">Cargando…</p>
         </div>
       </section>
@@ -109,7 +112,7 @@
            Contenido cargado por js/directorio.js desde Supabase.
            Solo muestra el teléfono cuando mostrar_telefono = true en BD.
            ============================================================ -->
-      <section id="directorio" class="privado-panel" role="tabpanel">
+      <section id="directorio" class="privado-panel" role="tabpanel" aria-labelledby="tab-directorio">
         <h2 class="panel-titulo">Directorio de socios</h2>
         <p class="directorio-aviso">
           Este directorio es de uso exclusivo para los socios del Casino Círculo de la Unión.
@@ -124,11 +127,40 @@
            Contenido cargado por js/eventos.js desde Supabase.
            Filtra: activo = true AND fecha >= hoy.
            ============================================================ -->
-      <section id="eventos" class="privado-panel" role="tabpanel">
+      <section id="eventos" class="privado-panel" role="tabpanel" aria-labelledby="tab-eventos">
         <h2 class="panel-titulo">Próximos eventos</h2>
         <div id="eventos-lista">
           <p class="empty-state">Cargando…</p>
         </div>
+      </section>
+
+      <!-- ============================================================
+           PANEL F — SUGERENCIAS
+           Formulario anónimo. js/sugerencias.js inserta en tabla `sugerencias`.
+           ============================================================ -->
+      <section id="sugerencias" class="privado-panel" role="tabpanel" aria-labelledby="tab-sugerencias">
+        <h2 class="panel-titulo">Sugerencias</h2>
+        <p class="sugerencias-intro">
+          Puedes enviar aquí cualquier sugerencia, propuesta o comentario a la junta
+          directiva. El envío es anónimo.
+        </p>
+        <form class="sugerencias-form" id="sugerencias-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="sugerencias-texto">Tu sugerencia</label>
+            <textarea
+              class="form-input sugerencias-textarea"
+              id="sugerencias-texto"
+              name="sugerencias-texto"
+              maxlength="1000"
+              placeholder="Escribe aquí tu sugerencia o comentario…"
+              required></textarea>
+          </div>
+          <div class="sugerencias-footer">
+            <button type="submit" class="btn btn-primary">Enviar sugerencia</button>
+            <span class="sugerencias-contador" id="sugerencias-contador">0 / 1000</span>
+          </div>
+          <p class="sugerencias-mensaje" id="sugerencias-mensaje" hidden></p>
+        </form>
       </section>
 
     </div>
@@ -151,14 +183,15 @@
   </footer>
   <!-- FOOTER END -->
 
-  <!-- config.js como script clásico expone SUPABASE_URL y SUPABASE_ANON_KEY
+  <!-- config.js como script clásico expone SUPABASE_URL, SUPABASE_ANON_KEY, SOCIOS_USER, SOCIOS_PASS
        como globales antes de que arranquen los módulos -->
   <script src="config.js"></script>
   <script type="module" src="js/socios-auth.js"></script>
   <script type="module" src="js/anuncios.js"></script>
-  <script type="module" src="js/actas.js"></script>
+  <script type="module" src="js/documentos.js"></script>
   <script type="module" src="js/directorio.js"></script>
   <script type="module" src="js/eventos.js"></script>
+  <script type="module" src="js/sugerencias.js"></script>
   <script type="module" src="js/nav.js"></script>
 
 </body>

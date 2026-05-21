@@ -3,7 +3,10 @@
 // SOCIOS_USER y SOCIOS_PASS provienen de config.js (script clásico cargado antes).
 /* global SOCIOS_USER, SOCIOS_PASS */
 
-const SESION_KEY = 'casino_socios_session';
+import { supabase } from './supabase-client.js';
+
+const SESION_KEY  = 'casino_socios_session';
+const ADMIN_KEY   = 'casino_admin_role';
 
 // ============================================================
 // LOGIN FORM — solo activo en socios.html
@@ -13,23 +16,44 @@ const form     = document.getElementById('socios-form');
 const msgError = document.getElementById('socios-error');
 
 if (form) {
-  // Si ya hay sesión activa, ir directo a la zona privada sin mostrar el formulario
+  // Si ya hay sesión de socio activa, ir directo a la zona privada
   if (localStorage.getItem(SESION_KEY) === 'active') {
     window.location.replace('socios-privado.html');
   }
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const usuario  = document.getElementById('usuario').value.trim();
     const password = document.getElementById('contrasena').value;
 
-    if (usuario === SOCIOS_USER && password === SOCIOS_PASS) {
-      localStorage.setItem(SESION_KEY, 'active');
-      window.location.href = 'socios-privado.html';
+    if (usuario.includes('@')) {
+      // Rama admin: autenticación con Supabase Auth
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+
+      const { error } = await supabase.auth.signInWithPassword({ email: usuario, password });
+
+      btn.disabled = false;
+      if (error) {
+        msgError.classList.add('visible');
+        document.getElementById('contrasena').value = '';
+        document.getElementById('contrasena').focus();
+      } else {
+        // Admin también necesita la sesión de socio para ver el contenido privado
+        localStorage.setItem(SESION_KEY, 'active');
+        sessionStorage.setItem(ADMIN_KEY, 'active');
+        window.location.href = 'socios-privado.html';
+      }
     } else {
-      msgError.classList.add('visible');
-      document.getElementById('contrasena').value = '';
-      document.getElementById('contrasena').focus();
+      // Rama socios: comparación de strings hardcodeada
+      if (usuario === SOCIOS_USER && password === SOCIOS_PASS) {
+        localStorage.setItem(SESION_KEY, 'active');
+        window.location.href = 'socios-privado.html';
+      } else {
+        msgError.classList.add('visible');
+        document.getElementById('contrasena').value = '';
+        document.getElementById('contrasena').focus();
+      }
     }
   });
 
@@ -49,6 +73,18 @@ if (btnLogout) {
   checkSession();
   btnLogout.addEventListener('click', logout);
   initTabs();
+
+  // Si hay sesión de Supabase Auth activa, mostrar enlace al panel admin.
+  // El enlace NO se renderiza si no hay sesión (no está en el DOM, no solo oculto).
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    if (!session) return;
+    const cabecera = document.querySelector('.privado-cabecera');
+    const enlace   = document.createElement('a');
+    enlace.href      = 'admin/index.html';
+    enlace.className = 'btn btn-secondary btn-sm';
+    enlace.textContent = 'Panel de administración';
+    cabecera.insertBefore(enlace, btnLogout);
+  });
 }
 
 // Inicializa el sistema de pestañas.
@@ -60,9 +96,10 @@ function initTabs() {
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t   => t.classList.remove('activa'));
+      tabs.forEach(t  => { t.classList.remove('activa'); t.setAttribute('aria-selected', 'false'); });
       panels.forEach(p => p.classList.remove('panel-visible'));
       tab.classList.add('activa');
+      tab.setAttribute('aria-selected', 'true');
       document.getElementById(tab.dataset.panel)?.classList.add('panel-visible');
     });
   });
@@ -72,17 +109,17 @@ function initTabs() {
 // FUNCIONES EXPORTADAS — usadas en socios-privado.html
 // ============================================================
 
-// Guarda de sesión: redirige a socios.html si no hay sesión activa.
-// Se llama automáticamente al detectar socios-privado.html (btnLogout presente).
+// Guarda de sesión: redirige a socios.html si no hay sesión de socio activa.
 export function checkSession() {
   if (localStorage.getItem(SESION_KEY) !== 'active') {
     window.location.replace('socios.html');
   }
 }
 
-// Cierra la sesión y vuelve al inicio.
-// Vinculada al botón "Cerrar sesión" de socios-privado.html.
-export function logout() {
+// Cierra la sesión de socio y de admin (si la hubiera) y vuelve al inicio.
+export async function logout() {
+  await supabase.auth.signOut();
+  sessionStorage.removeItem(ADMIN_KEY);
   localStorage.removeItem(SESION_KEY);
   window.location.href = 'index.html';
 }

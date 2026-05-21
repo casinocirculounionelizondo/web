@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sugerencias — Panel Admin · Casino Círculo de la Unión</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- SIDEBAR START -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <p class="text-label">Panel Admin</p>
+        <p class="admin-brand-name">Casino Círculo de la Unión</p>
+      </div>
+      <nav class="admin-nav" aria-label="Módulos del panel admin">
+        <a href="index.html"          class="admin-nav-link">Dashboard</a>
+        <a href="socios.html"         class="admin-nav-link">Socios</a>
+        <a href="eventos.html"        class="admin-nav-link">Eventos</a>
+        <a href="anuncios.html"       class="admin-nav-link">Anuncios</a>
+        <a href="documentos.html"     class="admin-nav-link">Documentos</a>
+        <a href="sugerencias.html"    class="admin-nav-link">
+          Sugerencias <span id="badge-sugerencias" class="admin-badge" hidden></span>
+        </a>
+        <a href="comunicaciones.html" class="admin-nav-link">Comunicaciones</a>
+      </nav>
+      <div class="admin-sidebar-bottom">
+        <a href="../socios-privado.html" class="admin-nav-link">← Zona de socios</a>
+        <button id="btn-admin-logout" class="btn btn-ghost btn-sm">Cerrar sesión</button>
+      </div>
+    </aside>
+    <!-- SIDEBAR END -->
+
+    <main class="admin-main">
+      <header class="admin-page-header">
+        <h1 class="text-heading">Sugerencias</h1>
+        <div class="admin-toolbar-right">
+          <select class="form-input" id="filtro-estado" style="width:auto">
+            <option value="todas">Todas</option>
+            <option value="nueva" selected>Nuevas</option>
+            <option value="leída">Leídas</option>
+            <option value="archivada">Archivadas</option>
+          </select>
+        </div>
+      </header>
+      <div class="admin-content">
+
+        <div class="admin-table-container">
+          <table class="admin-table" aria-label="Listado de sugerencias">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Sugerencia</th>
+                <th>Estado</th>
+                <th class="col-acciones">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="sugerencias-tbody">
+              <tr><td colspan="4" class="admin-empty">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Dialog: texto completo de la sugerencia -->
+  <dialog class="admin-dialog" id="dialog-sugerencia" aria-labelledby="dialog-sugerencia-titulo">
+    <div class="admin-dialog-header">
+      <p class="admin-dialog-titulo" id="dialog-sugerencia-titulo">Sugerencia</p>
+      <button class="admin-dialog-cerrar" id="btn-dialog-cerrar" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="admin-dialog-body">
+      <p class="text-meta" id="dialog-sugerencia-fecha"></p>
+      <p class="text-body" id="dialog-sugerencia-texto" style="margin-top:var(--space-3);line-height:1.7;white-space:pre-wrap;"></p>
+    </div>
+    <div class="admin-dialog-footer">
+      <button class="btn btn-ghost" id="btn-dialog-cerrar-2">Cerrar</button>
+    </div>
+  </dialog>
+
+  <!-- Dialog: confirmar eliminación -->
+  <dialog class="admin-dialog" id="dialog-confirmar" aria-labelledby="confirmar-titulo">
+    <div class="admin-dialog-header">
+      <p class="admin-dialog-titulo" id="confirmar-titulo">Eliminar sugerencia</p>
+      <button class="admin-dialog-cerrar" id="btn-confirmar-cerrar" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="admin-dialog-body">
+      <p class="text-body">¿Eliminar esta sugerencia? Esta acción no se puede deshacer.</p>
+    </div>
+    <div class="admin-dialog-footer">
+      <button class="btn btn-ghost" id="btn-confirmar-cancelar">Cancelar</button>
+      <button class="btn btn-primary" id="btn-confirmar-eliminar">Eliminar</button>
+    </div>
+  </dialog>
+
+  <script src="../config.js"></script>
+  <script type="module" src="auth-guard.js"></script>
+  <script type="module" src="sugerencias.js"></script>
+
+</body>
+</html>
