@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zona de Socios — Casino Círculo de la Unión de Elizondo</title>
+  <!-- Impedir indexación de la zona privada -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/socios.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV — replicado en todas las páginas.
+       Para actualizar: buscar NAV START / NAV END en cada HTML.
+       ============================================================ -->
+  <!-- NAV START -->
+  <header class="site-nav" role="banner">
+    <div class="nav-inner container">
+      <a href="index.html" class="nav-brand">Casino Círculo de la Unión</a>
+      <nav id="nav-links" class="nav-links" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="index.html"     class="nav-link">Inicio</a></li>
+          <li><a href="historia.html"  class="nav-link">Historia</a></li>
+          <li><a href="el-casino.html" class="nav-link">El Casino</a></li>
+          <li><a href="reservas.html"  class="nav-link">Reservas</a></li>
+          <li><a href="socios.html"    class="nav-link nav-link-socios">Socios</a></li>
+        </ul>
+      </nav>
+      <button class="nav-hamburger" id="nav-hamburger"
+              aria-label="Abrir menú"
+              aria-expanded="false"
+              aria-controls="nav-links">
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+  <!-- NAV END -->
+
+  <main class="page-top">
+    <div class="container">
+
+      <!-- Cabecera de la zona privada -->
+      <header class="privado-cabecera">
+        <h1 class="privado-titulo">Zona de Socios</h1>
+        <button class="btn btn-ghost btn-sm" id="btn-logout">Cerrar sesión</button>
+      </header>
+
+      <!-- Navegación interna por pestañas
+           La primera pestaña y el primer panel tienen sus clases activas en el HTML.
+           js/socios-auth.js gestiona los cambios al hacer clic. -->
+      <nav class="privado-tabs" aria-label="Secciones de la zona de socios" role="tablist">
+        <button class="privado-tab activa" data-panel="anuncios"   role="tab" aria-selected="true"  aria-controls="anuncios">Tablón</button>
+        <button class="privado-tab"        data-panel="estatutos"  role="tab" aria-selected="false" aria-controls="estatutos">Estatutos</button>
+        <button class="privado-tab"        data-panel="actas"      role="tab" aria-selected="false" aria-controls="actas">Actas</button>
+        <button class="privado-tab"        data-panel="directorio" role="tab" aria-selected="false" aria-controls="directorio">Directorio</button>
+        <button class="privado-tab"        data-panel="eventos"    role="tab" aria-selected="false" aria-controls="eventos">Eventos</button>
+      </nav>
+
+      <!-- ============================================================
+           PANEL A — TABLÓN DE ANUNCIOS
+           Contenido cargado por js/anuncios.js desde Supabase.
+           ============================================================ -->
+      <section id="anuncios" class="privado-panel panel-visible" role="tabpanel" aria-labelledby="tab-anuncios">
+        <h2 class="panel-titulo">Tablón de anuncios</h2>
+        <div id="anuncios-lista">
+          <p class="empty-state">Cargando…</p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           PANEL B — ESTATUTOS
+           Contenido estático. Sustituir docs/estatutos.pdf por el PDF real.
+           ============================================================ -->
+      <section id="estatutos" class="privado-panel" role="tabpanel">
+        <h2 class="panel-titulo">Estatutos de la Sociedad</h2>
+        <div class="estatutos-bloque">
+          <p class="estatutos-texto">
+            Los estatutos regulan el funcionamiento interno del Casino Círculo
+            de la Unión, los derechos y obligaciones de los socios, y el régimen
+            de gobierno de la sociedad.
+          </p>
+          <!-- Sustituir docs/estatutos.pdf por el PDF real cuando esté disponible -->
+          <a href="docs/estatutos.pdf" class="btn btn-secondary" download>
+            Descargar estatutos
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           PANEL C — ACTAS DE REUNIONES
+           Contenido cargado por js/actas.js desde Supabase.
+           Los PDF de actas se sirven desde la ruta url_pdf almacenada en BD.
+           ============================================================ -->
+      <section id="actas" class="privado-panel" role="tabpanel">
+        <h2 class="panel-titulo">Actas de reuniones</h2>
+        <div id="actas-lista">
+          <p class="empty-state">Cargando…</p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           PANEL D — DIRECTORIO DE SOCIOS
+           Contenido cargado por js/directorio.js desde Supabase.
+           Solo muestra el teléfono cuando mostrar_telefono = true en BD.
+           ============================================================ -->
+      <section id="directorio" class="privado-panel" role="tabpanel">
+        <h2 class="panel-titulo">Directorio de socios</h2>
+        <p class="directorio-aviso">
+          Este directorio es de uso exclusivo para los socios del Casino Círculo de la Unión.
+        </p>
+        <div id="directorio-lista">
+          <p class="empty-state">Cargando…</p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           PANEL E — PRÓXIMOS EVENTOS
+           Contenido cargado por js/eventos.js desde Supabase.
+           Filtra: activo = true AND fecha >= hoy.
+           ============================================================ -->
+      <section id="eventos" class="privado-panel" role="tabpanel">
+        <h2 class="panel-titulo">Próximos eventos</h2>
+        <div id="eventos-lista">
+          <p class="empty-state">Cargando…</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOTER — replicado en todas las páginas.
+       Para actualizar: buscar FOOTER START / FOOTER END en cada HTML.
+       ============================================================ -->
+  <!-- FOOTER START -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner container">
+      <div class="footer-main">
+        <p class="footer-name">Casino Círculo de la Unión de Elizondo</p>
+        <p class="footer-address">Jaime Urrutia 10, 31700 Elizondo – Baztán</p>
+        <p class="footer-tagline">Fundado en 1861 · La sociedad más antigua del Valle de Baztán</p>
+      </div>
+      <p class="footer-copy">© 2025 Casino Círculo de la Unión de Elizondo. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <!-- FOOTER END -->
+
+  <!-- config.js como script clásico expone SUPABASE_URL y SUPABASE_ANON_KEY
+       como globales antes de que arranquen los módulos -->
+  <script src="config.js"></script>
+  <script type="module" src="js/socios-auth.js"></script>
+  <script type="module" src="js/anuncios.js"></script>
+  <script type="module" src="js/actas.js"></script>
+  <script type="module" src="js/directorio.js"></script>
+  <script type="module" src="js/eventos.js"></script>
+  <script type="module" src="js/nav.js"></script>
+
+</body>
+</html>

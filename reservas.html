@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservas — Casino Círculo de la Unión de Elizondo</title>
+  <meta name="description" content="Reserva tu mesa en el Casino Círculo de la Unión de Elizondo a través del sistema Elkargest, exclusivo para socios.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/reservas.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV — replicado en todas las páginas.
+       Para actualizar: buscar NAV START / NAV END en cada HTML.
+       ============================================================ -->
+  <!-- NAV START -->
+  <header class="site-nav" role="banner">
+    <div class="nav-inner container">
+      <a href="index.html" class="nav-brand">Casino Círculo de la Unión</a>
+      <nav id="nav-links" class="nav-links" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="index.html"     class="nav-link">Inicio</a></li>
+          <li><a href="historia.html"  class="nav-link">Historia</a></li>
+          <li><a href="el-casino.html" class="nav-link">El Casino</a></li>
+          <li><a href="reservas.html"  class="nav-link">Reservas</a></li>
+          <li><a href="socios.html"    class="nav-link nav-link-socios">Socios</a></li>
+        </ul>
+      </nav>
+      <button class="nav-hamburger" id="nav-hamburger"
+              aria-label="Abrir menú"
+              aria-expanded="false"
+              aria-controls="nav-links">
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+  <!-- NAV END -->
+
+  <main class="page-top">
+    <div class="container-md">
+
+      <!-- Cabecera de la página -->
+      <header class="reservas-header">
+        <p class="text-label">Reservas</p>
+        <h1 class="reservas-header-titulo">Reserva tu mesa en el Casino</h1>
+      </header>
+
+      <!-- Contexto: qué es Elkargest y para quién es este sistema -->
+      <div class="reservas-contexto">
+        <p class="reservas-intro">
+          Para reservar mesa en el Casino Círculo de la Unión se utiliza Elkargest,
+          el software de gestión líder en sociedades gastronómicas de Euskadi y Navarra.
+          El sistema de reservas es de acceso exclusivo para socios.
+        </p>
+      </div>
+
+      <!-- Pasos para reservar -->
+      <section aria-labelledby="como-reservar-titulo">
+        <h2 class="pasos-seccion-titulo" id="como-reservar-titulo">Cómo reservar</h2>
+        <ol class="pasos-lista">
+
+          <li class="paso">
+            <span class="paso-numero" aria-hidden="true">01</span>
+            <p class="paso-texto">
+              Accede al sistema con el enlace de abajo.
+            </p>
+          </li>
+
+          <li class="paso">
+            <span class="paso-numero" aria-hidden="true">02</span>
+            <p class="paso-texto">
+              Identifícate con tus credenciales de socio en Elkargest.
+            </p>
+          </li>
+
+          <li class="paso">
+            <span class="paso-numero" aria-hidden="true">03</span>
+            <p class="paso-texto">
+              Elige fecha, turno (comida o cena) y mesa disponible.
+            </p>
+          </li>
+
+          <li class="paso">
+            <span class="paso-numero" aria-hidden="true">04</span>
+            <p class="paso-texto">
+              Confirma. Recibirás confirmación en pantalla.
+            </p>
+          </li>
+
+        </ol>
+      </section>
+
+      <!-- CTA de acceso al sistema -->
+      <div class="reservas-cta">
+
+        <!-- URL de reservas del Casino en Elkargest. Actualizar con la URL
+             específica del Casino cuando la junta la confirme. -->
+        <a href="https://erreserbak.elkargest.com/"
+           class="btn btn-primary btn-lg"
+           target="_blank"
+           rel="noopener noreferrer">
+          Acceder al sistema de reservas →
+        </a>
+
+        <p class="reservas-nota">
+          El sistema de reservas es gestionado por Elkargest.<br>
+          Para problemas de acceso, contacta con la junta directiva.
+        </p>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOTER — replicado en todas las páginas.
+       Para actualizar: buscar FOOTER START / FOOTER END en cada HTML.
+       ============================================================ -->
+  <!-- FOOTER START -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner container">
+      <div class="footer-main">
+        <p class="footer-name">Casino Círculo de la Unión de Elizondo</p>
+        <p class="footer-address">Jaime Urrutia 10, 31700 Elizondo – Baztán</p>
+        <p class="footer-tagline">Fundado en 1861 · La sociedad más antigua del Valle de Baztán</p>
+      </div>
+      <p class="footer-copy">© 2025 Casino Círculo de la Unión de Elizondo. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <!-- FOOTER END -->
+
+  <script type="module" src="js/nav.js"></script>
+
+</body>
+</html>

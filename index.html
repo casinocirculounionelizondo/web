@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casino Círculo de la Unión de Elizondo</title>
+  <meta name="description" content="Casino Círculo de la Unión de Elizondo. La sociedad más antigua del Valle de Baztán, fundada en 1861. Historia, gastronomía y vida social.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/inicio.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV — replicado en todas las páginas.
+       Para actualizar el nav, buscar este mismo bloque
+       NAV START / NAV END en cada archivo HTML.
+       ============================================================ -->
+  <!-- NAV START -->
+  <header class="site-nav" role="banner">
+    <div class="nav-inner container">
+      <a href="index.html" class="nav-brand">Casino Círculo de la Unión</a>
+      <nav id="nav-links" class="nav-links" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="index.html"     class="nav-link">Inicio</a></li>
+          <li><a href="historia.html"  class="nav-link">Historia</a></li>
+          <li><a href="el-casino.html" class="nav-link">El Casino</a></li>
+          <li><a href="reservas.html"  class="nav-link">Reservas</a></li>
+          <li><a href="socios.html"    class="nav-link nav-link-socios">Socios</a></li>
+        </ul>
+      </nav>
+      <button class="nav-hamburger" id="nav-hamburger"
+              aria-label="Abrir menú"
+              aria-expanded="false"
+              aria-controls="nav-links">
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+  <!-- NAV END -->
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+         Imagen de fondo con overlay oscuro. La URL de la imagen
+         se cambia en css/inicio.css → .hero { background-image: }
+         ============================================================ -->
+    <section class="hero" aria-label="Portada">
+      <div class="hero-content container">
+        <p class="text-label anim-fade-in-up">Est. 1861</p>
+        <h1 class="hero-titulo anim-fade-in-up-delay-1">
+          Casino Círculo<br>de la Unión
+        </h1>
+        <p class="hero-subtitulo anim-fade-in-up-delay-2">
+          La sociedad más antigua del Valle de Baztán
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PRESENTACIÓN
+         ============================================================ -->
+    <section class="section presentacion" aria-label="Presentación">
+      <div class="container">
+        <p class="presentacion-texto">
+          Desde 1861, un lugar de encuentro para los socios del Valle de Baztán.
+          Historia, gastronomía y vida social en el corazón de Elizondo.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ACCESO RÁPIDO
+         Tres tarjetas de enlace a las secciones principales
+         ============================================================ -->
+    <section class="section acceso-rapido" aria-label="Acceso rápido">
+      <div class="container">
+        <div class="acceso-grid">
+
+          <!-- Tarjeta: El Casino -->
+          <a href="el-casino.html" class="acceso-card">
+            <div class="acceso-icono" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 22V9l9-7 9 7v13"/>
+                <rect x="9" y="14" width="6" height="8"/>
+                <path d="M3 9h18"/>
+                <path d="M12 2v7"/>
+              </svg>
+            </div>
+            <h2 class="acceso-nombre">El Casino</h2>
+            <p class="acceso-descripcion">Conoce nuestras instalaciones y servicios</p>
+          </a>
+
+          <!-- Tarjeta: Reservas -->
+          <a href="reservas.html" class="acceso-card">
+            <div class="acceso-icono" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8"  y1="2" x2="8"  y2="6"/>
+                <line x1="3"  y1="10" x2="21" y2="10"/>
+                <line x1="8"  y1="15" x2="8"  y2="15" stroke-width="2.5"/>
+                <line x1="12" y1="15" x2="12" y2="15" stroke-width="2.5"/>
+                <line x1="16" y1="15" x2="16" y2="15" stroke-width="2.5"/>
+              </svg>
+            </div>
+            <h2 class="acceso-nombre">Reservas</h2>
+            <p class="acceso-descripcion">Reserva tu mesa en el Casino</p>
+          </a>
+
+          <!-- Tarjeta: Socios -->
+          <a href="socios.html" class="acceso-card">
+            <div class="acceso-icono" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8.5" cy="12.5" r="4.5"/>
+                <path d="M13 12h8"/>
+                <path d="M21 12v3"/>
+                <path d="M17 12v3"/>
+              </svg>
+            </div>
+            <h2 class="acceso-nombre">Socios</h2>
+            <p class="acceso-descripcion">Accede al área privada de socios</p>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER — replicado en todas las páginas.
+       Para actualizar el footer, buscar este mismo bloque
+       FOOTER START / FOOTER END en cada archivo HTML.
+       ============================================================ -->
+  <!-- FOOTER START -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner container">
+      <div class="footer-main">
+        <p class="footer-name">Casino Círculo de la Unión de Elizondo</p>
+        <p class="footer-address">Jaime Urrutia 10, 31700 Elizondo – Baztán</p>
+        <p class="footer-tagline">Fundado en 1861 · La sociedad más antigua del Valle de Baztán</p>
+      </div>
+      <p class="footer-copy">© 2025 Casino Círculo de la Unión de Elizondo. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <!-- FOOTER END -->
+
+  <script type="module" src="js/nav.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+/* ============================================================
+   inicio.css — Estilos específicos de index.html
+   Casino Círculo de la Unión de Elizondo
+   ============================================================ */
+
+/* ============================================================
+   HERO
+   Imagen de fondo con overlay oscuro. La imagen del hero se
+   cambia aquí: propiedad background-image de .hero.
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  /* Imagen del hero — sustituir por foto real del edificio cuando esté disponible */
+  background-image: url('../img/hero.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Overlay oscuro semitransparente sobre la imagen */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.50);
+  pointer-events: none;
+}
+
+/* Contenido centrado verticalmente, separado del nav fijo */
+.hero-content {
+  position: relative;
+  z-index: var(--z-base);
+  padding-top: calc(var(--nav-height) + var(--space-12));
+  padding-bottom: var(--space-20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* Título principal del hero */
+.hero-titulo {
+  font-family: var(--font-serif);
+  font-size: var(--text-5xl);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-on-dark);
+}
+
+/* Subtítulo del hero */
+.hero-subtitulo {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--color-on-dark-muted);
+  max-width: 42ch;
+}
+
+/* Etiqueta "Est. 1861" — usa .text-label de style.css, color sobreescrito */
+.hero .text-label {
+  color: var(--color-on-dark-muted);
+  letter-spacing: 0.12em;
+}
+
+/* ============================================================
+   PRESENTACIÓN
+   Frase central de la web, tipografía serif destacada
+   ============================================================ */
+.presentacion {
+  text-align: center;
+  background-color: var(--color-bg);
+}
+
+.presentacion-texto {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text);
+  font-style: italic;
+  max-width: 55ch;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   ACCESO RÁPIDO
+   Tres tarjetas de navegación al El Casino, Reservas y Socios
+   ============================================================ */
+.acceso-rapido {
+  background-color: var(--color-bg-alt);
+}
+
+.acceso-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 520px) {
+  .acceso-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 860px) {
+  .acceso-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+/* Cada tarjeta es un enlace de bloque */
+.acceso-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-8) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow var(--transition-base), transform var(--transition-base),
+              border-color var(--transition-base);
+}
+
+.acceso-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-border-dark);
+}
+
+.acceso-icono {
+  color: var(--color-accent);
+  line-height: 0; /* evita espacio extra bajo el SVG */
+}
+
+.acceso-nombre {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.acceso-descripcion {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  flex-grow: 1; /* empuja el contenido a la parte superior, alineando alturas */
+}
+
+/* ============================================================
+   RESPONSIVE — ajustes en pantallas pequeñas
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero-content {
+    padding-top: calc(var(--nav-height-mob) + var(--space-10));
+    padding-bottom: var(--space-16);
+  }
+}
+
+/* En la grid de 2 columnas, la tercera tarjeta se centra si queda sola */
+@media (min-width: 520px) and (max-width: 859px) {
+  .acceso-grid .acceso-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - var(--space-2));
+    margin-inline: auto;
+  }
+}

@@ -1,0 +1,242 @@
+/* ============================================================
+   nav.css — Navegación principal
+   Casino Círculo de la Unión de Elizondo
+
+   HTML de referencia (replicar en cada página):
+   Ver bloque <!-- NAV START --> / <!-- NAV END --> en index.html
+   ============================================================ */
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  z-index: var(--z-nav);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* ============================================================
+   MARCA
+   ============================================================ */
+.nav-brand {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: color var(--transition-fast);
+}
+
+.nav-brand:hover {
+  color: var(--color-accent);
+}
+
+/* ============================================================
+   ENLACES DE NAVEGACIÓN
+   ============================================================ */
+.nav-links {
+  /* En escritorio: visible y en línea */
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  list-style: none;
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid transparent;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-text);
+}
+
+/* Enlace de la página actual */
+.nav-link.nav-link-active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* Enlace Socios — acceso privado, visualmente diferenciado */
+.nav-link-socios {
+  color: var(--color-text);
+  font-weight: 500;
+  padding: var(--space-1) var(--space-3);
+  padding-bottom: var(--space-1);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast),
+              border-color var(--transition-fast),
+              background-color var(--transition-fast);
+}
+
+.nav-link-socios:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.nav-link-socios.nav-link-active {
+  background-color: var(--color-accent);
+  color: var(--color-on-dark);
+  border-color: var(--color-accent);
+}
+
+/* ============================================================
+   HAMBURGER — solo visible en móvil
+   3 líneas que animan a una X al abrirse
+   ============================================================ */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-hamburger-line {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-text);
+  border-radius: 1px;
+  transform-origin: center;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+/*
+  Cálculo de la animación X:
+  Con gap: 5px y líneas de 1.5px, la distancia entre centros de líneas
+  adyacentes es 6.5px. La línea 1 sube 6.5px y rota 45°; la línea 3
+  baja 6.5px y rota -45°; la línea 2 desaparece.
+*/
+.nav-hamburger.nav-hamburger-open .nav-hamburger-line:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav-hamburger.nav-hamburger-open .nav-hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-hamburger.nav-hamburger-open .nav-hamburger-line:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ============================================================
+   RESPONSIVE — MÓVIL
+   ============================================================ */
+@media (max-width: 768px) {
+  .site-nav {
+    height: var(--nav-height-mob);
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  /* Menú desplegable — oculto por defecto bajo el nav */
+  .nav-links {
+    position: fixed;
+    top: var(--nav-height-mob);
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-3) var(--space-4) var(--space-5);
+    z-index: calc(var(--z-nav) - 1);
+
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity var(--transition-base), transform var(--transition-base);
+  }
+
+  .nav-links.nav-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .nav-list li {
+    width: 100%;
+  }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+    padding: var(--space-3) 0;
+    font-size: var(--text-base);
+    border-bottom: 1px solid var(--color-border);
+    border-left: none;
+
+    /* Sobreescribir el borde inferior de estado activo en móvil */
+    border-bottom-width: 1px;
+    border-bottom-color: var(--color-border);
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .nav-link.nav-link-active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-border);
+  }
+
+  /* Socios en móvil: mantiene su estilo de borde propio */
+  .nav-link-socios {
+    display: inline-block;
+    width: auto;
+    margin-top: var(--space-3);
+    border: 1px solid var(--color-border-dark);
+    border-radius: var(--radius-sm);
+  }
+
+  .nav-link-socios.nav-link-active {
+    background-color: var(--color-accent);
+    color: var(--color-on-dark);
+    border-color: var(--color-accent);
+  }
+}
+
+/* Branding ligeramente reducido en pantallas muy pequeñas */
+@media (max-width: 400px) {
+  .nav-brand {
+    font-size: var(--text-md);
+  }
+}

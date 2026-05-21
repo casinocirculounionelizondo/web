@@ -1,0 +1,350 @@
+/* ============================================================
+   el-casino.css — Estilos específicos de el-casino.html
+   Casino Círculo de la Unión de Elizondo
+   ============================================================ */
+
+/* ============================================================
+   CABECERA DE PÁGINA
+   ============================================================ */
+.casino-header {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 0;
+}
+
+.casino-header .text-label {
+  margin-bottom: var(--space-3);
+}
+
+.casino-header-titulo {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  max-width: 24ch;
+}
+
+/* ============================================================
+   SECCIONES
+   Cada bloque (edificio, ubicación, instalaciones, galería)
+   separado con borde inferior y padding generoso
+   ============================================================ */
+.casino-seccion {
+  padding-block: var(--space-12);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.casino-seccion:last-child {
+  border-bottom: none;
+  padding-bottom: var(--space-20);
+}
+
+.casino-seccion-titulo {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-text);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-8);
+}
+
+/* ============================================================
+   A) EL EDIFICIO
+   ============================================================ */
+.casino-texto {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text);
+  max-width: 68ch;
+}
+
+/* ============================================================
+   B) DÓNDE ESTAMOS
+   Dirección + mapa en dos columnas en escritorio
+   ============================================================ */
+.casino-ubicacion {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .casino-ubicacion {
+    grid-template-columns: 1fr 2fr;
+    align-items: start;
+    gap: var(--space-10);
+  }
+}
+
+.casino-direccion {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.casino-direccion-nombre {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.casino-direccion-linea {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Iframe del mapa — el borde se elimina aquí, no con style inline */
+.mapa-iframe {
+  width: 100%;
+  height: 380px;
+  border: 0;
+  border-radius: var(--radius-md);
+  display: block;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   C) INSTALACIONES Y SERVICIOS
+   Grid de tarjetas informativas (no son enlaces)
+   ============================================================ */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 480px) {
+  .servicios-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 860px) {
+  .servicios-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+}
+
+.servicio-card {
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.servicio-icono {
+  color: var(--color-accent);
+  line-height: 0;
+}
+
+.servicio-nombre {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.servicio-desc {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   D) GALERÍA
+   Grid de imágenes — clic abre lightbox
+   ============================================================ */
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+@media (min-width: 640px) {
+  .galeria-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Cada botón de galería es un contenedor con relación de aspecto fija */
+.galeria-item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background-color: var(--color-bg-subtle);
+
+  /* Resetear estilos de botón */
+  border: none;
+  padding: 0;
+  display: block;
+  width: 100%;
+}
+
+.galeria-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+
+.galeria-item:hover img,
+.galeria-item:focus-visible img {
+  transform: scale(1.05);
+}
+
+.galeria-item:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   LIGHTBOX
+   Inyectado por js/lightbox.js. Estilos aquí para mantener
+   toda la presentación en CSS y no en JS.
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 8, 6, 0.94);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-6);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.lightbox.lightbox-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.lightbox-figura {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: min(90vw, 1100px);
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.lightbox-caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--color-on-dark-faint);
+  text-align: center;
+}
+
+/* Botones del lightbox: cerrar, anterior, siguiente */
+.lightbox-cerrar,
+.lightbox-prev,
+.lightbox-next {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-on-dark);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.lightbox-cerrar:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(255, 255, 255, 0.20);
+}
+
+.lightbox-cerrar {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 40px;
+  height: 40px;
+  font-size: var(--text-xl);
+  line-height: 1;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  width: 44px;
+  height: 64px;
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
+/* En pantallas pequeñas: botones más pequeños, flechas debajo de la imagen */
+@media (max-width: 640px) {
+  .lightbox {
+    flex-direction: column;
+    padding: var(--space-10) var(--space-4) var(--space-4);
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    order: 2;
+    width: 50px;
+    height: 40px;
+  }
+
+  .lightbox-figura {
+    order: 1;
+    max-width: 100%;
+  }
+
+  .lightbox-img {
+    max-height: 60vh;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — ajustes generales en pantallas pequeñas
+   ============================================================ */
+@media (max-width: 768px) {
+  .casino-header {
+    padding-top: var(--space-10);
+  }
+
+  .casino-seccion {
+    padding-block: var(--space-10);
+  }
+
+  .mapa-iframe {
+    height: 280px;
+  }
+}

@@ -1,0 +1,70 @@
+/* ============================================================
+   footer.css — Pie de página
+   Casino Círculo de la Unión de Elizondo
+
+   HTML de referencia (replicar en cada página):
+   Ver bloque <!-- FOOTER START --> / <!-- FOOTER END --> en index.html
+   ============================================================ */
+
+.site-footer {
+  background-color: var(--color-accent);
+  padding-block: var(--space-10);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Bloque con nombre, dirección y descripción */
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer-name {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--color-on-dark);
+  line-height: 1.2;
+}
+
+.footer-address {
+  color: var(--color-on-dark-muted);
+  font-size: var(--text-sm);
+}
+
+.footer-tagline {
+  color: var(--color-on-dark-faint);
+  font-size: var(--text-xs);
+}
+
+/* Copyright separado del resto */
+.footer-copy {
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(240, 235, 225, 0.15);
+  color: var(--color-on-dark-faint);
+  font-size: var(--text-xs);
+}
+
+/* ============================================================
+   RESPONSIVE — escritorio: nombre a la izquierda, copyright a la derecha
+   ============================================================ */
+@media (min-width: 640px) {
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-copy {
+    padding-top: 0;
+    border-top: none;
+    text-align: right;
+    flex-shrink: 0;
+    max-width: 40%;
+  }
+}

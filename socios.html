@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socios — Casino Círculo de la Unión de Elizondo</title>
+  <meta name="description" content="Acceso al área privada de socios del Casino Círculo de la Unión de Elizondo.">
+  <!-- Impedir que los buscadores indexen la zona privada -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/socios.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV — replicado en todas las páginas.
+       Para actualizar: buscar NAV START / NAV END en cada HTML.
+       ============================================================ -->
+  <!-- NAV START -->
+  <header class="site-nav" role="banner">
+    <div class="nav-inner container">
+      <a href="index.html" class="nav-brand">Casino Círculo de la Unión</a>
+      <nav id="nav-links" class="nav-links" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="index.html"     class="nav-link">Inicio</a></li>
+          <li><a href="historia.html"  class="nav-link">Historia</a></li>
+          <li><a href="el-casino.html" class="nav-link">El Casino</a></li>
+          <li><a href="reservas.html"  class="nav-link">Reservas</a></li>
+          <li><a href="socios.html"    class="nav-link nav-link-socios">Socios</a></li>
+        </ul>
+      </nav>
+      <button class="nav-hamburger" id="nav-hamburger"
+              aria-label="Abrir menú"
+              aria-expanded="false"
+              aria-controls="nav-links">
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+  <!-- NAV END -->
+
+  <main class="page-top socios-login-pagina">
+
+    <div class="socios-login-card" role="main">
+
+      <header class="socios-login-cabecera">
+        <p class="text-label">Zona de Socios</p>
+        <h1 class="socios-login-titulo">Acceso privado</h1>
+      </header>
+
+      <form class="socios-form" id="socios-form" novalidate aria-label="Formulario de acceso">
+
+        <div class="form-group">
+          <label class="form-label" for="usuario">Usuario</label>
+          <input
+            class="form-input"
+            type="text"
+            id="usuario"
+            name="usuario"
+            autocomplete="username"
+            spellcheck="false"
+            autocapitalize="none"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="contrasena">Contraseña</label>
+          <input
+            class="form-input"
+            type="password"
+            id="contrasena"
+            name="contrasena"
+            autocomplete="current-password"
+            required>
+        </div>
+
+        <!-- El mensaje de error se muestra añadiendo la clase .visible desde JS -->
+        <div class="form-error" id="socios-error" role="alert" aria-live="polite">
+          Usuario o contraseña incorrectos.
+        </div>
+
+        <button type="submit" class="btn btn-primary">Entrar</button>
+
+      </form>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER — replicado en todas las páginas.
+       Para actualizar: buscar FOOTER START / FOOTER END en cada HTML.
+       ============================================================ -->
+  <!-- FOOTER START -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner container">
+      <div class="footer-main">
+        <p class="footer-name">Casino Círculo de la Unión de Elizondo</p>
+        <p class="footer-address">Jaime Urrutia 10, 31700 Elizondo – Baztán</p>
+        <p class="footer-tagline">Fundado en 1861 · La sociedad más antigua del Valle de Baztán</p>
+      </div>
+      <p class="footer-copy">© 2025 Casino Círculo de la Unión de Elizondo. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <!-- FOOTER END -->
+
+  <!-- config.js cargado como script clásico para exponer SOCIOS_USER y SOCIOS_PASS
+       como variables globales antes de que arranque socios-auth.js -->
+  <script src="config.js"></script>
+  <script type="module" src="js/socios-auth.js"></script>
+  <script type="module" src="js/nav.js"></script>
+
+</body>
+</html>

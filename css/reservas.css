@@ -1,0 +1,153 @@
+/* ============================================================
+   reservas.css — Estilos específicos de reservas.html
+   Casino Círculo de la Unión de Elizondo
+   ============================================================ */
+
+/* ============================================================
+   CABECERA DE PÁGINA
+   ============================================================ */
+.reservas-header {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-12);
+}
+
+.reservas-header .text-label {
+  margin-bottom: var(--space-3);
+}
+
+.reservas-header-titulo {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  max-width: 22ch;
+}
+
+/* ============================================================
+   CONTEXTO — párrafo introductorio sobre Elkargest
+   ============================================================ */
+.reservas-contexto {
+  margin-bottom: var(--space-16);
+}
+
+.reservas-intro {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  max-width: 62ch;
+}
+
+/* ============================================================
+   CÓMO RESERVAR — pasos numerados
+   ============================================================ */
+.pasos-seccion-titulo {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-text);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-10);
+}
+
+.pasos-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-bottom: var(--space-16);
+}
+
+.paso {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+/* Número en serif grande, color acento — aria-hidden para que el lector
+   de pantalla no lo lea (el orden ya se infiere del contexto de lista) */
+.paso-numero {
+  font-family: var(--font-serif);
+  font-size: var(--text-4xl);
+  font-weight: 300;
+  color: var(--color-accent);
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 3.5rem;
+  text-align: right;
+  user-select: none;
+}
+
+.paso-texto {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-text);
+  /* Ajuste óptico para alinear la línea de base del texto
+     con el centro visual del número */
+  padding-top: 0.45rem;
+}
+
+/* ============================================================
+   CTA — caja de acceso al sistema de reservas
+   ============================================================ */
+.reservas-cta {
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-24);
+}
+
+.reservas-nota {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--color-text-faint);
+  max-width: 50ch;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .reservas-header {
+    padding-top: var(--space-10);
+    margin-bottom: var(--space-10);
+  }
+
+  .reservas-contexto {
+    margin-bottom: var(--space-10);
+  }
+
+  .pasos-lista {
+    margin-bottom: var(--space-10);
+  }
+
+  .paso-numero {
+    font-size: var(--text-3xl);
+    min-width: 2.5rem;
+  }
+
+  .paso-texto {
+    font-size: var(--text-base);
+    padding-top: 0.3rem;
+  }
+
+  .reservas-cta {
+    padding: var(--space-8) var(--space-5);
+    margin-bottom: var(--space-16);
+  }
+}
