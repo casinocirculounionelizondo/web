@@ -13,7 +13,7 @@ export const authReady = supabase.auth.getSession().then(({ data: { session } })
     window.location.replace('../index.html');
     return null;
   }
-  document.body.style.visibility = '';
+  document.body.style.visibility = 'visible';
   marcarEnlaceActivo();
   cargarBadgeSugerencias();
   return session;

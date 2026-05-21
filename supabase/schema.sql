@@ -264,7 +264,26 @@ create policy "Admin puede eliminar socios"      on socios_directorio for delete
 
 
 -- ------------------------------------------------------------
--- 5. Pasos manuales en el dashboard de Supabase:
+-- 5. SELECT para el rol authenticated en tablas de lectura pública
+--    El admin logueado con Supabase Auth usa el rol authenticated,
+--    que no hereda automáticamente las policies del rol anon.
+-- ------------------------------------------------------------
+
+create policy "Authenticated puede leer anuncios"
+  on anuncios for select to authenticated using (true);
+
+create policy "Authenticated puede leer eventos"
+  on eventos for select to authenticated using (true);
+
+create policy "Authenticated puede leer directorio"
+  on socios_directorio for select to authenticated using (true);
+
+create policy "Authenticated puede leer documentos"
+  on documentos for select to authenticated using (true);
+
+
+-- ------------------------------------------------------------
+-- 6. Pasos manuales en el dashboard de Supabase:
 --
 --    a) Storage → New bucket → nombre: "documentos" → Public: activado
 --    b) Subir PDFs de docs/ al bucket y actualizar url_storage en tabla documentos
